@@ -91,6 +91,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.zcshou.Ding;
 import com.zcshou.service.ServiceGo;
 import com.zcshou.database.DataBaseHistoryLocation;
 import com.zcshou.database.DataBaseHistorySearch;
@@ -211,7 +212,7 @@ public class MainActivity extends BaseActivity implements SensorEventListener {
 
         initUpdateVersion();
 
-        checkUpdateVersion(false);
+//        checkUpdateVersion(false);
     }
 
     @Override
@@ -650,7 +651,7 @@ public class MainActivity extends BaseActivity implements SensorEventListener {
         //可选，默认false，设置是否需要POI结果，可以在BDLocation.getPoiList里得到
         locationOption.setIsNeedLocationPoiList(false);
         //可选，默认false，设置是否收集CRASH信息，默认收集
-        locationOption.setIgnoreCacheException(true);
+//        locationOption.setIgnoreCacheException(true);
         //可选，默认false，设置是否开启Gps定位
         //locationOption.setOpenGps(true);
         locationOption.setOpenGnss(true);
@@ -918,8 +919,8 @@ public class MainActivity extends BaseActivity implements SensorEventListener {
     // 记录请求的位置信息
     private void recordCurrentLocation(double lng, double lat) {
         //参数坐标系：bd09
-        final String safeCode = BuildConfig.MAPS_SAFE_CODE;
-        final String ak = sharedPreferences.getString("setting_map_key", BuildConfig.MAPS_API_KEY);
+        final String safeCode = Ding.MAPS_SAFE_CODE;
+        final String ak = sharedPreferences.getString("setting_map_key", Ding.MAPS_API_KEY);
         double[] latLng = MapUtils.bd2wgs(lng, lat);
         //bd09坐标的位置信息
         String mapApiUrl = "https://api.map.baidu.com/reverse_geocoding/v3/?ak=" + ak + "&output=json&coordtype=bd09ll" + "&location=" + lat + "," + lng + "&mcode=" + safeCode;

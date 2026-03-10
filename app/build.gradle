@@ -26,7 +26,8 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.zcshou.gogogo"
+//        applicationId "com.zcshou.gogogo"
+        applicationId "com.king.ding2"
         minSdkVersion 27
         //noinspection ExpiredTargetSdkVersion
         targetSdkVersion 32
