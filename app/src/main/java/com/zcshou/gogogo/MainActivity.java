@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -140,8 +141,8 @@ public class MainActivity extends BaseActivity implements SensorEventListener {
     private final float[] mDirectionValues = new float[3];//模拟方向传感器的数据（原始数据为弧度）
     /************** 定位 *****************/
     private LocationClient mLocClient = null;
-    private double mCurrentLat = 0.0;       // 当前位置的百度纬度
-    private double mCurrentLon = 0.0;       // 当前位置的百度经度
+    private double mCurrentLat = 23.122931;       // 当前位置的百度纬度
+    private double mCurrentLon = 113.382401;       // 当前位置的百度经度
     private float mCurrentDirection = 0.0f;
     private boolean isFirstLoc = true; // 是否首次定位
     private boolean isMockServStart = false;
@@ -578,11 +579,14 @@ public class MainActivity extends BaseActivity implements SensorEventListener {
                     mCurrentCity = bdLocation.getCity();
                     mCurrentLat = bdLocation.getLatitude();
                     mCurrentLon = bdLocation.getLongitude();
+                    Log.i("BDLocation", "bdLocation: " + bdLocation);
+                    Log.i("BDLocation", "mCurrentLat: " + mCurrentLat);
+                    Log.i("BDLocation", "mCurrentLon: " + mCurrentLon);
                     MyLocationData locData = new MyLocationData.Builder()
                             .accuracy(bdLocation.getRadius())
                             .direction(mCurrentDirection)// 此处设置开发者获取到的方向信息，顺时针0-360
-                            .latitude(bdLocation.getLatitude())
-                            .longitude(bdLocation.getLongitude()).build();
+                            .latitude(mCurrentLat)
+                            .longitude(mCurrentLon).build();
                     mBaiduMap.setMyLocationData(locData);
                     MyLocationConfiguration configuration = new MyLocationConfiguration(MyLocationConfiguration.LocationMode.NORMAL, true, null);
                     mBaiduMap.setMyLocationConfiguration(configuration);
@@ -595,7 +599,7 @@ public class MainActivity extends BaseActivity implements SensorEventListener {
                         if (isFirstLoc) {
                             isFirstLoc = false;
                             // 这里记录百度地图返回的位置
-                            mMarkLatLngMap = new LatLng(bdLocation.getLatitude(), bdLocation.getLongitude());
+                            mMarkLatLngMap = new LatLng(mCurrentLat, mCurrentLon);
                             MapStatus.Builder builder = new MapStatus.Builder();
                             builder.target(mMarkLatLngMap).zoom(18.0f);
                             mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
