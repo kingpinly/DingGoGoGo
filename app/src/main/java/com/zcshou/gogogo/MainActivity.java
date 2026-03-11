@@ -141,8 +141,8 @@ public class MainActivity extends BaseActivity implements SensorEventListener {
     private final float[] mDirectionValues = new float[3];//模拟方向传感器的数据（原始数据为弧度）
     /************** 定位 *****************/
     private LocationClient mLocClient = null;
-    private double mCurrentLat = 23.122931;       // 当前位置的百度纬度
-    private double mCurrentLon = 113.382401;       // 当前位置的百度经度
+    private double mCurrentLat = 23.123178;       // 当前位置的百度纬度
+    private double mCurrentLon = 113.382903;       // 当前位置的百度经度
     private float mCurrentDirection = 0.0f;
     private boolean isFirstLoc = true; // 是否首次定位
     private boolean isMockServStart = false;
@@ -577,8 +577,8 @@ public class MainActivity extends BaseActivity implements SensorEventListener {
                     }
 
                     mCurrentCity = bdLocation.getCity();
-                    mCurrentLat = bdLocation.getLatitude();
-                    mCurrentLon = bdLocation.getLongitude();
+//                    mCurrentLat = bdLocation.getLatitude();
+//                    mCurrentLon = bdLocation.getLongitude();
                     Log.i("BDLocation", "bdLocation: " + bdLocation);
                     Log.i("BDLocation", "mCurrentLat: " + mCurrentLat);
                     Log.i("BDLocation", "mCurrentLon: " + mCurrentLon);
